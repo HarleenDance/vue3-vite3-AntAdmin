@@ -65,7 +65,7 @@ module.exports = {
       },
     ],
     'no-unused-vars': [
-      'error',
+      'off',
       {
         argsIgnorePattern: '^_',
         varsIgnorePattern: '^_',
@@ -79,13 +79,13 @@ module.exports = {
     'vue/multi-word-component-names': 'off',
 
     // prettier
-    'prettier/prettier': 'error',
+    'prettier/prettier': 'off',
 
     // import
-    'import/first': 'error',
-    'import/no-duplicates': 'error',
+    'import/first': 'off',
+    'import/no-duplicates': 'off',
     'import/order': [
-      'error',
+      'off',
       {
         groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
 

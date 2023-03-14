@@ -1,16 +1,22 @@
-# vite-vue3-admin
+<!--
+ * @Descripttion:
+ * @version: 18.1.2
+ * @Author: Harleens
+ * @Date: 2022-10-15 11:25:32
+ * @LastEditors: Harleens
+ * @LastEditTime: 2022-10-16 22:14:18
+-->
 
-> 基于 vite2.x 重构整个前后端项目，完善后端权限控制细粒度，封装更多场景化组件...正在完善中
+# vite3-vue3-admin
 
-基于 vite2.x + vue3.x + antd-design-vue3.x + typescript4.x 的后台管理系统模板
+> 基于 vite3.x 重构整个前后端项目，完善后端权限控制细粒度，封装更多场景化组件...正在完善中
+
+基于 vite3.x + vue3.x + antd-design-vue3.x + typescript4.x 的后台管理系统模板
 
 - 账号：rootadmin，密码：123456
 - 在线预览（ [gitee](http://buqiyuan.gitee.io/vite-vue3-admin/) / [vercel](https://vite-vue3-admin.vercel.app/) ）
 - [swagger 文档](https://nest-api.buqiyuan.site/api/swagger-api/static/index.html#/)
 - [后台地址](https://github.com/buqiyuan/nest-admin)
-- [react 版 coding](https://github.com/buqiyuan/react-antd-admin)
-- [vue-cli](https://github.com/buqiyuan/vite-vue3-admin)
-- [gitee 地址](https://gitee.com/buqiyuan/vite-vue3-admin)
 - 根据 JSON 生成 typescript 的工具：[http://json2ts.com/](http://json2ts.com/)
 
 部分设计参考了 [vue-vben-admin](https://github.com/vbenjs/vue-vben-admin)
@@ -79,26 +85,3 @@ pnpm build
   - `ci` 持续集成
   - `types` 类型定义文件更改
   - `wip` 开发中
-
-## 更新日志
-
-[CHANGELOG](./CHANGELOG.md)
-
-### QQ 交流群（2022-3-8）
-
-[![加入QQ群](https://img.shields.io/badge/570108996-blue.svg)](https://qm.qq.com/cgi-bin/qm/qr?k=ID-KcAOdPUPWVgAnsPLF3gRdHLc8GURO&jump_from=webapi)
-
-<div><img src="https://cdn.jsdelivr.net/gh/buqiyuan/MyImageHosting/imgs/vue3-antdv-admin/qq_group.jpg" height="280" /></div>
-
-## 赞赏
-
-如果你觉得这个项目对你有帮助，你可以帮作者买一杯咖啡表示支持!
-
-| 微信 | 支付宝 |
-| :-: | :-: |
-| <img src="https://cdn.jsdelivr.net/gh/buqiyuan/MyImageHosting/imgs/vue3-antdv-admin/weixin.jpg" height="220" /> | <img src="https://cdn.jsdelivr.net/gh/buqiyuan/MyImageHosting/imgs/vue3-antdv-admin/zhifubao.jpg" height="220" /> |
-
-## 感谢 JetBrains 免费的开源授权
-
-<a href="https://www.jetbrains.com/?from=Mybatis-PageHelper" target="_blank">
-<img src="https://user-images.githubusercontent.com/1787798/69898077-4f4e3d00-138f-11ea-81f9-96fb7c49da89.png" height="200"/></a>

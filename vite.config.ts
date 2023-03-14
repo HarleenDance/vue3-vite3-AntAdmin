@@ -14,8 +14,13 @@ import dayjs from 'dayjs';
 import DefineOptions from 'unplugin-vue-define-options/vite';
 import pkg from './package.json';
 import type { UserConfig, ConfigEnv } from 'vite';
-
+import Icons from 'unplugin-icons/vite';
+import IconsResolver from 'unplugin-icons/resolver';
+import AutoImport from 'unplugin-auto-import/vite';
+// import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 const CWD = process.cwd();
+import OptimizationPersist from 'vite-plugin-optimize-persist';
+import PkgConfig from 'vite-plugin-package-config';
 
 // 环境变量
 // const BASE_ENV_CONFIG = loadEnv('', CWD);
@@ -33,12 +38,12 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
   const { VITE_BASE_URL, VITE_DROP_CONSOLE } = loadEnv(mode, CWD);
 
   const isBuild = command === 'build';
-
   return {
     base: VITE_BASE_URL,
     define: {
       __APP_INFO__: JSON.stringify(__APP_INFO__),
     },
+
     resolve: {
       alias: [
         {
@@ -52,12 +57,55 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       ],
     },
     plugins: [
+      AutoImport({
+        // Auto import functions from Vue, e.g. ref, reactive, toRef...
+        // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
+        imports: ['vue'],
+
+        // Auto import functions from Element Plus, e.g. ElMessage, ElMessageBox... (with style)
+        // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
+        resolvers: [
+          // ElementPlusResolver(),
+
+          // Auto import icon components
+          // 自动导入图标组件
+          IconsResolver({
+            prefix: 'Icon',
+          }),
+        ],
+
+        dts: resolve(resolve(__dirname, './src'), 'auto-imports.d.ts'),
+      }),
+      // https://github.com/antfu/unplugin-vue-components
+      Components({
+        resolvers: [
+          AntDesignVueResolver({
+            exclude: ['AButton'],
+          }),
+          // Auto register icon components
+          // 自动注册图标组件
+          IconsResolver({
+            enabledCollections: ['ep'],
+          }),
+          // Auto register Element Plus components
+          // 自动导入 Element Plus 组件
+          // ElementPlusResolver(),
+        ],
+
+        // dts: resolve(resolve(__dirname, './src'), "components.d.ts"),
+        // directoryAsNamespace: true,
+      }),
+      PkgConfig(),
+      OptimizationPersist(),
       mkcert(),
       vue(),
       Unocss(),
       DefineOptions(), // https://github.com/sxzz/unplugin-vue-define-options
       vueJsx({
         // options are passed on to @vue/babel-plugin-jsx
+      }),
+      Icons({
+        autoInstall: true,
       }),
 
       legacy({
@@ -84,15 +132,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
           setupProdMockServer();
           `,
       }),
-      // https://github.com/antfu/unplugin-vue-components
-      Components({
-        resolvers: [
-          AntDesignVueResolver({
-            exclude: ['AButton'],
-          }),
-        ],
-        // directoryAsNamespace: true,
-      }),
+
       // https://github.com/fi3ework/vite-plugin-checker
       checker({
         typescript: true,
@@ -126,14 +166,14 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       https: true,
       proxy: {
         '/api': {
-          target: 'https://nest-api.buqiyuan.site/api/',
-          // target: 'http://localhost:7001',
+          // target: 'http://175.178.67.107:7001',
+          target: 'http://localhost:7001',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
         },
         '/ws-api': {
-          target: 'wss://nest-api.buqiyuan.site',
-          // target: 'http://localhost:7002',
+          // target: 'http://175.178.67.107:7002',
+          target: 'http://localhost:7002',
           changeOrigin: true, //是否允许跨域
           ws: true,
         },
@@ -146,6 +186,32 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         'lodash-es',
         'ant-design-vue/es/locale/zh_CN',
         'ant-design-vue/es/locale/en_US',
+        'element-plus/es',
+        'element-plus/es/components/config-provider/style/css',
+        'element-plus/es/components/container/style/css',
+        'element-plus/es/components/main/style/css',
+        'element-plus/es/components/header/style/css',
+        'element-plus/es/components/date-picker/style/css',
+        'element-plus/es/components/drawer/style/css',
+        'element-plus/es/components/image/style/css',
+        'element-plus/es/components/image/style/css',
+        'element-plus/es/components/table/style/css',
+        'element-plus/es/components/table-column/style/css',
+        'element-plus/es/components/input/style/css',
+        'element-plus/es/components/dropdown/style/css',
+        'element-plus/es/components/popover/style/css',
+        'element-plus/es/components/dropdown-item/style/css',
+        'element-plus/es/components/dropdown-menu/style/css',
+        'element-plus/es/components/pagination/style/css',
+        'element-plus/es/components/scrollbar/style/css',
+        'element-plus/es/components/dialog/style/css',
+        'element-plus/es/components/loading/style/css',
+        'element-plus/es/components/tabs/style/css',
+        'element-plus/es/components/tab-pane/style/css',
+        'element-plus/es/components/select/style/css',
+        'element-plus/es/components/option/style/css',
+        'element-plus/es/components/divider/style/css',
+        // `${optimizeDepsElementPlusIncludes}`
       ],
     },
     esbuild: {

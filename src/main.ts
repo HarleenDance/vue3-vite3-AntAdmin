@@ -1,3 +1,11 @@
+/*
+ * @Descripttion:
+ * @version: 18.1.2
+ * @Author: Harleens
+ * @Date: 2022-10-15 11:25:33
+ * @LastEditors: Harleens
+ * @LastEditTime: 2022-10-16 20:38:11
+ */
 import { createApp } from 'vue';
 import App from './App.vue';
 import { setupRouter } from './router';
@@ -10,7 +18,6 @@ import {
   setupGlobalMethods,
   setupCustomComponents,
 } from '@/plugins';
-
 const app = createApp(App);
 
 function setupPlugins() {

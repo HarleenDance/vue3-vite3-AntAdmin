@@ -13,6 +13,8 @@ dist
 .local
 /bin
 /src/mock
+/src/views/document
+/src/views/login
 Dockerfile
 commitlint.config.js
 

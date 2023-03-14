@@ -22,7 +22,7 @@
     line-height: 64px;
 
     img {
-      height: 32px;
+      height: 80px;
       margin-right: 8px;
     }
 

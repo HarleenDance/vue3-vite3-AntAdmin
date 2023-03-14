@@ -24,7 +24,12 @@
     "noImplicitAny": false,
     "skipLibCheck": true,
     "removeComments": true,
-    "types": ["node", "vite/client", "unplugin-vue-define-options/macros-global"],
+    "types": [
+      "node",
+      "vite/client",
+      "unplugin-vue-define-options/macros-global",
+      "element-plus/global"
+    ],
     "paths": {
       "@/*": ["src/*"]
     }
@@ -37,7 +42,9 @@
     "src/**/*.vue",
     "types/**/*.d.ts",
     "types/**/*.ts",
-    "vite.config.ts"
+    "vite.config.ts",
+    "auto-imports.d copy.ts",
+    "auto-imports.d copy.ts"
   ],
   "exclude": ["node_modules", "dist", "**/*.js", "**/*.md", "src/**/*.md"]
 }

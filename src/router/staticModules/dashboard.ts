@@ -25,6 +25,18 @@ const routes: Array<RouteRecordRaw> = [
         component: () =>
           import(/* webpackChunkName: "dashboard-welcome" */ '@/views/dashboard/welcome/index.vue'),
       },
+      {
+        path: 'analysis',
+        name: 'Analysis',
+        component: () => import('@/views/dashboard/welcome/Analysis.vue'),
+        meta: { icon: 'icon-shijuexianshi', title: '分析页', permission: ['dashboard'] },
+      },
+      {
+        path: 'monitor',
+        name: 'Monitor',
+        component: () => import('@/views/dashboard/welcome/Monitor.vue'),
+        meta: { icon: 'icon-neironganquan', title: '监控页（外部）', permission: ['dashboard'] },
+      },
     ],
   },
 ];

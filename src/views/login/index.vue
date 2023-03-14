@@ -2,8 +2,8 @@
   <div class="login-box">
     <div class="login-logo">
       <!-- <svg-icon name="logo" :size="45" /> -->
-      <img src="~@/assets/images/logo.png" width="45" />
-      <h1 class="mb-0 ml-2 text-3xl font-bold">Antd Admin</h1>
+      <img src="@/assets/images/logo.png" width="45" />
+      <h1 class="mb-0 ml-2 text-3xl font-bold">欢迎来到 Harleen-admin! 👋🏻 </h1>
     </div>
     <a-form layout="horizontal" :model="state.formInline" @submit.prevent="handleSubmit">
       <a-form-item>
@@ -44,12 +44,25 @@
           登录
         </a-button>
       </a-form-item>
+      <!-- <el-divider> 演示账号一键登录 </el-divider>
+            <el-row class="row-bg" justify="center">
+                <el-col :span="6">
+                    <a-button size="small" @click="onSubmitEvent('rootadmin')"
+                        >rootadmin</a-button
+                    ></el-col
+                >
+                <el-col :span="6">
+                    <a-button size="small" @click="onSubmitEvent('czmadmin')"
+                        >czmadmin</a-button
+                    ></el-col
+                >
+            </el-row> -->
     </a-form>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { reactive } from 'vue';
+  import { reactive, ref } from 'vue';
   import { UserOutlined, LockOutlined, SafetyOutlined } from '@ant-design/icons-vue';
   import { useRoute, useRouter } from 'vue-router';
   import { message, Modal } from 'ant-design-vue';
@@ -67,6 +80,7 @@
       captchaId: '',
     },
   });
+  const visible = ref(false);
 
   const route = useRoute();
   const router = useRouter();
@@ -107,6 +121,29 @@
     state.loading = false;
     message.destroy();
   };
+  const onSubmitEvent = async (user) => {
+    const formInline: Object = {
+      username: user,
+      password: '123456',
+    };
+    message.loading('登录中...', 0);
+    state.loading = true;
+    // params.password = md5(password)
+
+    const [err] = await to(userStore.login(formInline));
+    if (err) {
+      Modal.error({
+        title: () => '提示',
+        content: () => err.message,
+      });
+      setCaptcha();
+    } else {
+      message.success('登录成功！');
+      setTimeout(() => router.replace((route.query.redirect as string) ?? '/'));
+    }
+    state.loading = false;
+    message.destroy();
+  };
 </script>
 
 <style lang="less" scoped>
@@ -119,6 +156,17 @@
     background-size: 100%;
     flex-direction: column;
     align-items: center;
+
+    .font-bold {
+      color: #fff;
+    }
+
+    .absolute {
+      right: 3px;
+      /* top: -10px; */
+      margin-top: -8px;
+      position: absolute;
+    }
 
     .login-logo {
       display: flex;
